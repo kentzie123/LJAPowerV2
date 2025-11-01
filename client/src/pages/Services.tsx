@@ -1,10 +1,21 @@
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Settings, Wrench, PhoneCall, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
 import serviceImage from '@assets/generated_images/Technician_servicing_generator_d5ab4806.png';
 
 export default function Services() {
+  const [selectedService, setSelectedService] = useState<number | null>(null);
+
   const services = [
     {
       icon: Settings,
@@ -16,7 +27,25 @@ export default function Services() {
         "Code compliance certification",
         "System testing and commissioning",
         "Training for your staff"
-      ]
+      ],
+      detailedInfo: {
+        overview: "Our installation services are designed to ensure your generator system is installed correctly, safely, and in compliance with all local, state, and federal regulations. We handle every aspect of the installation process from start to finish.",
+        process: [
+          "Initial site survey and power requirement analysis",
+          "Detailed installation plan and timeline development",
+          "Permits and regulatory approval coordination",
+          "Professional installation by certified technicians",
+          "Comprehensive system testing and load bank testing",
+          "Staff training and documentation handover"
+        ],
+        benefits: [
+          "Peace of mind knowing your system is installed correctly",
+          "Full compliance with all applicable codes and standards",
+          "Optimized performance from day one",
+          "Comprehensive warranty coverage",
+          "Reduced risk of future issues"
+        ]
+      }
     },
     {
       icon: Wrench,
@@ -28,7 +57,25 @@ export default function Services() {
         "Parts replacement and updates",
         "Performance optimization",
         "Detailed service reports"
-      ]
+      ],
+      detailedInfo: {
+        overview: "Regular maintenance is critical to ensuring your generator operates reliably when you need it most. Our preventive maintenance programs are tailored to your specific equipment and usage patterns.",
+        process: [
+          "Customized maintenance schedule based on your needs",
+          "Visual and operational inspections",
+          "Fluid level checks and replacements",
+          "Filter replacements and cleaning",
+          "Battery testing and maintenance",
+          "Load testing and performance verification"
+        ],
+        benefits: [
+          "Extended equipment lifespan",
+          "Reduced risk of unexpected failures",
+          "Lower long-term operating costs",
+          "Maintained warranty compliance",
+          "Detailed records for compliance reporting"
+        ]
+      }
     },
     {
       icon: CheckCircle2,
@@ -40,7 +87,25 @@ export default function Services() {
         "Expert diagnostics",
         "Quality replacement parts",
         "Warranty on all repairs"
-      ]
+      ],
+      detailedInfo: {
+        overview: "When your generator experiences issues, our expert technicians are available 24/7 to diagnose and repair the problem quickly. We stock a comprehensive inventory of parts to minimize downtime.",
+        process: [
+          "Emergency call received and logged",
+          "Technician dispatched within 2 hours",
+          "On-site diagnostics and problem identification",
+          "Repair plan and quote provided",
+          "Repairs completed using genuine parts",
+          "System testing and verification"
+        ],
+        benefits: [
+          "Minimized downtime and lost productivity",
+          "Expert diagnosis prevents recurring issues",
+          "Genuine parts ensure quality and compatibility",
+          "Comprehensive warranty on all work",
+          "Detailed service documentation"
+        ]
+      }
     },
     {
       icon: PhoneCall,
@@ -52,7 +117,25 @@ export default function Services() {
         "Cost-benefit evaluation",
         "Regulatory compliance review",
         "Ongoing support and advice"
-      ]
+      ],
+      detailedInfo: {
+        overview: "Our consultation services help you make informed decisions about your power generation needs. We analyze your requirements and recommend solutions that provide the best value and reliability.",
+        process: [
+          "Initial consultation to understand your needs",
+          "Detailed power load analysis",
+          "Site evaluation for optimal placement",
+          "System design and specification",
+          "Cost analysis and ROI calculations",
+          "Ongoing support during decision-making"
+        ],
+        benefits: [
+          "Right-sized system for your needs",
+          "Optimized capital investment",
+          "Future-proof solution design",
+          "Expert guidance throughout the process",
+          "Confidence in your decision"
+        ]
+      }
     }
   ];
 
@@ -105,12 +188,76 @@ export default function Services() {
               <ServiceCard
                 key={index}
                 {...service}
-                onLearnMore={() => console.log(`Learn more: ${service.title}`)}
+                onLearnMore={() => setSelectedService(index)}
               />
             ))}
           </div>
         </div>
       </section>
+
+      <Dialog open={selectedService !== null} onOpenChange={() => setSelectedService(null)}>
+        <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
+          {selectedService !== null && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-3 text-2xl">
+                  {(() => {
+                    const ServiceIcon = services[selectedService].icon;
+                    return <ServiceIcon className="h-8 w-8 text-primary" />;
+                  })()}
+                  {services[selectedService].title}
+                </DialogTitle>
+                <DialogDescription className="text-base mt-2">
+                  {services[selectedService].description}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="space-y-6 mt-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Overview</h3>
+                  <p className="text-muted-foreground">
+                    {services[selectedService].detailedInfo.overview}
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Our Process</h3>
+                  <ul className="space-y-2">
+                    {services[selectedService].detailedInfo.process.map((step, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-primary font-bold mt-1">{i + 1}.</span>
+                        <span className="text-foreground">{step}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold mb-3 text-foreground">Key Benefits</h3>
+                  <ul className="space-y-2">
+                    {services[selectedService].detailedInfo.benefits.map((benefit, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-foreground">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="pt-4 border-t border-border">
+                  <Button
+                    onClick={() => setSelectedService(null)}
+                    className="w-full"
+                    data-testid="button-close-dialog"
+                  >
+                    Close
+                  </Button>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <section className="py-20 px-6 bg-card">
         <div className="max-w-7xl mx-auto">
