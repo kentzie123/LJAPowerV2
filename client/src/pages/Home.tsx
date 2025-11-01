@@ -128,20 +128,22 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {featuredProducts.map((product, index) => (
-              <Link key={index} href={`/product/${product.slug}`}>
-                <a data-testid={`link-product-${product.slug}`}>
-                  <ProductCard {...product} />
-                </a>
+              <Link 
+                key={index} 
+                href={`/product/${product.slug}`}
+                data-testid={`link-product-${product.slug}`}
+              >
+                <ProductCard {...product} />
               </Link>
             ))}
           </div>
 
           <div className="text-center">
-            <Link href="/products">
-              <Button size="lg" data-testid="button-view-all-products">
+            <Button asChild size="lg" data-testid="button-view-all-products">
+              <Link href="/products">
                 View All Products
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -179,11 +181,11 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <Link href="/services">
-                <Button size="lg" data-testid="button-view-services">
+              <Button asChild size="lg" data-testid="button-view-services">
+                <Link href="/services">
                   View Our Services
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -217,21 +219,22 @@ export default function Home() {
             Get in touch with our experts to find the perfect generator solution for your needs
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button size="lg" variant="secondary" data-testid="button-cta-contact">
+            <Button asChild size="lg" variant="secondary" data-testid="button-cta-contact">
+              <Link href="/contact">
                 Contact Us Today
-              </Button>
-            </Link>
-            <Link href="/products">
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
-                data-testid="button-cta-products"
-              >
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
+              data-testid="button-cta-products"
+            >
+              <Link href="/products">
                 Browse Products
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

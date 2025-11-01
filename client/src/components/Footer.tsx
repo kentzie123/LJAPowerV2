@@ -19,31 +19,39 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-foreground">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about">
-                  <a className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-about">
-                    About Us
-                  </a>
+                <Link 
+                  href="/about" 
+                  className="text-muted-foreground hover:text-primary transition-colors" 
+                  data-testid="link-footer-about"
+                >
+                  About Us
                 </Link>
               </li>
               <li>
-                <Link href="/products">
-                  <a className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-products">
-                    Products
-                  </a>
+                <Link 
+                  href="/products" 
+                  className="text-muted-foreground hover:text-primary transition-colors" 
+                  data-testid="link-footer-products"
+                >
+                  Products
                 </Link>
               </li>
               <li>
-                <Link href="/services">
-                  <a className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-services">
-                    Services
-                  </a>
+                <Link 
+                  href="/services" 
+                  className="text-muted-foreground hover:text-primary transition-colors" 
+                  data-testid="link-footer-services"
+                >
+                  Services
                 </Link>
               </li>
               <li>
-                <Link href="/projects">
-                  <a className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-projects">
-                    Projects & Testimonies
-                  </a>
+                <Link 
+                  href="/projects" 
+                  className="text-muted-foreground hover:text-primary transition-colors" 
+                  data-testid="link-footer-projects"
+                >
+                  Projects & Testimonies
                 </Link>
               </li>
             </ul>

@@ -22,11 +22,13 @@ export default function ProductDetail() {
     <div className="min-h-screen bg-background">
       <section className="py-8 px-6 border-b border-border">
         <div className="max-w-7xl mx-auto">
-          <Link href="/products">
-            <a className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4" data-testid="link-back-products">
-              <ArrowLeft className="h-4 w-4" />
-              Back to Products
-            </a>
+          <Link 
+            href="/products"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4" 
+            data-testid="link-back-products"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Products
           </Link>
         </div>
       </section>
@@ -57,16 +59,16 @@ export default function ProductDetail() {
               </div>
 
               <div className="flex gap-4">
-                <Link href="/contact">
-                  <Button size="lg" data-testid="button-request-quote">
+                <Button asChild size="lg" data-testid="button-request-quote">
+                  <Link href="/contact">
                     Request Quote
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button size="lg" variant="secondary" data-testid="button-contact-us">
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="secondary" data-testid="button-contact-us">
+                  <Link href="/contact">
                     Contact Us
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
@@ -132,11 +134,11 @@ export default function ProductDetail() {
                 <p className="text-foreground mb-6" data-testid="text-warranty">
                   {product.details.warranty}
                 </p>
-                <Link href="/contact">
-                  <Button className="w-full" data-testid="button-get-quote">
+                <Button asChild className="w-full" data-testid="button-get-quote">
+                  <Link href="/contact">
                     Get a Quote
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </Card>
 
               <Card className="p-6">
@@ -152,11 +154,11 @@ export default function ProductDetail() {
                   <li>• Custom solutions</li>
                   <li>• 24/7 support</li>
                 </ul>
-                <Link href="/contact">
-                  <Button variant="secondary" className="w-full" data-testid="button-contact-expert">
+                <Button asChild variant="secondary" className="w-full" data-testid="button-contact-expert">
+                  <Link href="/contact">
                     Contact an Expert
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </Card>
 
               <Card className="p-6">
@@ -204,16 +206,16 @@ export default function ProductDetail() {
             Contact our team to discuss your power generation needs and get a customized quote.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button size="lg" data-testid="button-cta-contact">
+            <Button asChild size="lg" data-testid="button-cta-contact">
+              <Link href="/contact">
                 Request a Quote
-              </Button>
-            </Link>
-            <Link href="/products">
-              <Button size="lg" variant="secondary" data-testid="button-cta-browse">
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="secondary" data-testid="button-cta-browse">
+              <Link href="/products">
                 Browse All Products
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

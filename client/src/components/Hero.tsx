@@ -34,21 +34,22 @@ export default function Hero({ title, subtitle, backgroundImage, showCTA = true,
         
         {showCTA && (
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/products">
-              <Button size="lg" data-testid="button-hero-products">
+            <Button asChild size="lg" data-testid="button-hero-products">
+              <Link href="/products">
                 View Our Products
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button
-                size="lg"
-                variant="outline"
-                className="backdrop-blur-md bg-background/20"
-                data-testid="button-hero-contact"
-              >
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="backdrop-blur-md bg-background/20"
+              data-testid="button-hero-contact"
+            >
+              <Link href="/contact">
                 Contact Us
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         )}
       </div>
