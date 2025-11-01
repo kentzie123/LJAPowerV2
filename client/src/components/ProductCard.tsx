@@ -1,17 +1,15 @@
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 interface ProductCardProps {
   name: string;
   image: string;
   specs: { label: string; value: string }[];
   price?: string;
-  onViewDetails?: () => void;
 }
 
-export default function ProductCard({ name, image, specs, price, onViewDetails }: ProductCardProps) {
+export default function ProductCard({ name, image, specs, price }: ProductCardProps) {
   return (
-    <Card className="overflow-hidden hover-elevate active-elevate-2 transition-transform hover:-translate-y-1" data-testid={`card-product-${name.toLowerCase().replace(/\s+/g, "-")}`}>
+    <Card className="overflow-hidden hover-elevate active-elevate-2 transition-transform hover:-translate-y-1 h-full" data-testid={`card-product-${name.toLowerCase().replace(/\s+/g, "-")}`}>
       <div className="aspect-[4/3] overflow-hidden">
         <img
           src={image}
@@ -41,18 +39,10 @@ export default function ProductCard({ name, image, specs, price, onViewDetails }
         </div>
 
         {price && (
-          <div className="text-2xl font-bold text-primary mb-4" data-testid="text-product-price">
+          <div className="text-2xl font-bold text-primary" data-testid="text-product-price">
             {price}
           </div>
         )}
-
-        <Button
-          onClick={onViewDetails}
-          className="w-full"
-          data-testid="button-view-details"
-        >
-          View Details
-        </Button>
       </div>
     </Card>
   );

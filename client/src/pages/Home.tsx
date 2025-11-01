@@ -32,6 +32,7 @@ export default function Home() {
   const featuredProducts = [
     {
       name: "Commercial Generator 250kW",
+      slug: "commercial-generator-250kw",
       image: productImage,
       specs: [
         { label: "Power Output", value: "250 kW" },
@@ -42,6 +43,7 @@ export default function Home() {
     },
     {
       name: "Industrial Generator 500kW",
+      slug: "industrial-generator-500kw",
       image: productImage,
       specs: [
         { label: "Power Output", value: "500 kW" },
@@ -52,6 +54,7 @@ export default function Home() {
     },
     {
       name: "Prime Power Generator 1000kW",
+      slug: "prime-power-generator-1000kw",
       image: productImage,
       specs: [
         { label: "Power Output", value: "1000 kW" },
@@ -125,11 +128,11 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {featuredProducts.map((product, index) => (
-              <ProductCard
-                key={index}
-                {...product}
-                onViewDetails={() => console.log(`View details: ${product.name}`)}
-              />
+              <Link key={index} href={`/product/${product.slug}`}>
+                <a data-testid={`link-product-${product.slug}`}>
+                  <ProductCard {...product} />
+                </a>
+              </Link>
             ))}
           </div>
 
