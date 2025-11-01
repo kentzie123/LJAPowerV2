@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 interface ProductCardProps {
   name: string;
@@ -9,7 +10,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ name, image, specs, price }: ProductCardProps) {
   return (
-    <Card className="overflow-hidden hover-elevate active-elevate-2 transition-transform hover:-translate-y-1 h-full" data-testid={`card-product-${name.toLowerCase().replace(/\s+/g, "-")}`}>
+    <Card className="overflow-hidden hover-elevate active-elevate-2 transition-transform hover:-translate-y-1 h-full flex flex-col" data-testid={`card-product-${name.toLowerCase().replace(/\s+/g, "-")}`}>
       <div className="aspect-[4/3] overflow-hidden">
         <img
           src={image}
@@ -18,12 +19,12 @@ export default function ProductCard({ name, image, specs, price }: ProductCardPr
           data-testid="img-product"
         />
       </div>
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-xl font-semibold mb-4 text-foreground" data-testid="text-product-name">
           {name}
         </h3>
         
-        <div className="space-y-2 mb-4">
+        <div className="space-y-2 mb-4 flex-grow">
           {specs.map((spec, index) => (
             <div
               key={index}
@@ -38,11 +39,9 @@ export default function ProductCard({ name, image, specs, price }: ProductCardPr
           ))}
         </div>
 
-        {price && (
-          <div className="text-2xl font-bold text-primary" data-testid="text-product-price">
-            {price}
-          </div>
-        )}
+        <Button className="w-full mt-auto" data-testid="button-view-details">
+          View Details
+        </Button>
       </div>
     </Card>
   );

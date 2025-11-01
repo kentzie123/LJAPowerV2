@@ -1,63 +1,12 @@
 import Hero from "@/components/Hero";
 import ProjectCard from "@/components/ProjectCard";
 import TestimonialCard from "@/components/TestimonialCard";
-import { Card } from "@/components/ui/card";
-import projectImage1 from '@assets/generated_images/Generator_installation_project_66ff5c5e.png';
-import projectImage2 from '@assets/generated_images/Technician_servicing_generator_d5ab4806.png';
+import { getAllProjects } from "@/data/projects";
+import { Link } from "wouter";
 import showroomImage from '@assets/generated_images/Generator_showroom_display_040b73ab.png';
 
 export default function Projects() {
-  //todo: remove mock functionality - replace with real data
-  const projects = [
-    {
-      title: "Hospital Backup Power System",
-      client: "Regional Medical Center",
-      location: "Downtown District",
-      capacity: "1,500 kW",
-      image: projectImage1,
-      description: "Complete backup power solution ensuring uninterrupted operations during power outages with dual redundancy."
-    },
-    {
-      title: "Manufacturing Facility Power",
-      client: "Manufacturing Solutions Inc.",
-      location: "Industrial Park",
-      capacity: "2,000 kW",
-      image: projectImage2,
-      description: "Prime power installation supporting continuous 24/7 manufacturing operations with load management system."
-    },
-    {
-      title: "Data Center Infrastructure",
-      client: "Tech Industries Corp.",
-      location: "Technology District",
-      capacity: "3,000 kW",
-      image: projectImage1,
-      description: "Mission-critical power system with N+1 redundancy and automated failover capabilities."
-    },
-    {
-      title: "Commercial Complex Backup",
-      client: "Metro Shopping Center",
-      location: "City Center",
-      capacity: "800 kW",
-      image: projectImage2,
-      description: "Emergency backup power for high-traffic commercial facility with integrated building management."
-    },
-    {
-      title: "University Campus Power",
-      client: "State University",
-      location: "University District",
-      capacity: "1,200 kW",
-      image: showroomImage,
-      description: "Distributed power generation system serving multiple campus buildings with central monitoring."
-    },
-    {
-      title: "Water Treatment Facility",
-      client: "Municipal Water Authority",
-      location: "Waterfront",
-      capacity: "1,800 kW",
-      image: projectImage1,
-      description: "Critical infrastructure power backup ensuring continuous water treatment and distribution."
-    }
-  ];
+  const projects = getAllProjects();
 
   const testimonials = [
     {
@@ -145,7 +94,13 @@ export default function Projects() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <ProjectCard key={index} {...project} />
+              <Link 
+                key={index} 
+                href={`/project/${project.slug}`}
+                data-testid={`link-project-${project.slug}`}
+              >
+                <ProjectCard {...project} />
+              </Link>
             ))}
           </div>
         </div>

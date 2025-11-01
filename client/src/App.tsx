@@ -11,6 +11,7 @@ import Products from "@/pages/Products";
 import ProductDetail from "@/pages/ProductDetail";
 import Services from "@/pages/Services";
 import Projects from "@/pages/Projects";
+import ProjectDetail from "@/pages/ProjectDetail";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
 
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/product/:slug" component={ProductDetail} />
       <Route path="/services" component={Services} />
       <Route path="/projects" component={Projects} />
+      <Route path="/project/:slug" component={ProjectDetail} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
