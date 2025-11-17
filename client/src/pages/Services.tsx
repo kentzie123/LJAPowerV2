@@ -1,13 +1,6 @@
 import { useState } from "react";
 import Hero from "@/components/Hero";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import {
   Wrench,
   Zap,
@@ -29,6 +22,7 @@ interface Service {
   title: string;
   tagline: string;
   description: string;
+  fullDescription: string;
   benefits: string[];
   process: string[];
   color: string;
@@ -42,7 +36,8 @@ const services: Service[] = [
     icon: Wrench,
     title: "Preventive Maintenance",
     tagline: "Keep systems running at peak performance",
-    description: "Proactive maintenance programs designed to keep your generator operating reliably and efficiently. We handle regular inspections, fluid checks, filter replacements, and comprehensive testing to prevent unexpected breakdowns.",
+    description: "Proactive maintenance programs designed to keep your generator operating reliably and efficiently.",
+    fullDescription: "Our preventive maintenance programs are designed to keep your generator operating reliably and efficiently. We handle regular inspections, fluid checks, filter replacements, and comprehensive testing to prevent unexpected breakdowns. Regular maintenance is critical to ensuring your generator operates reliably when you need it most.",
     benefits: [
       "Extended equipment lifespan through regular care",
       "Reduced risk of catastrophic failures",
@@ -67,7 +62,8 @@ const services: Service[] = [
     icon: Zap,
     title: "ATS Installation",
     tagline: "Automatic power failover in seconds",
-    description: "Professional Automatic Transfer Switch installation that seamlessly switches between utility power and your generator with zero downtime. Ensures continuous operation during outages with intelligent control systems.",
+    description: "Professional Automatic Transfer Switch installation that seamlessly switches between utility power and your generator.",
+    fullDescription: "Professional Automatic Transfer Switch installation that seamlessly switches between utility power and your generator with zero downtime. Ensures continuous operation during outages with intelligent control systems. An ATS system provides automatic failover, eliminating the need for manual switching and ensuring uninterrupted power supply to your critical systems.",
     benefits: [
       "Automatic transfer with zero manual intervention",
       "Zero downtime during power transitions",
@@ -92,7 +88,8 @@ const services: Service[] = [
     icon: Cpu,
     title: "Controller Conversion",
     tagline: "Upgrade to smart generator controls",
-    description: "Replace outdated controllers with modern, intelligent generator control systems. Enhanced monitoring, diagnostics, and remote capabilities provide superior performance and management of your power generation infrastructure.",
+    description: "Replace outdated controllers with modern, intelligent generator control systems with enhanced functionality.",
+    fullDescription: "Replace outdated controllers with modern, intelligent generator control systems. Enhanced monitoring, diagnostics, and remote capabilities provide superior performance and management of your power generation infrastructure. Modern controllers offer real-time data, predictive maintenance alerts, and remote management capabilities that older systems cannot provide.",
     benefits: [
       "Advanced real-time monitoring and diagnostics",
       "Improved fuel efficiency and engine performance",
@@ -117,7 +114,8 @@ const services: Service[] = [
     icon: AlertTriangle,
     title: "Troubleshooting & Diagnostics",
     tagline: "Fast diagnosis and expert solutions",
-    description: "Expert diagnostic services to quickly identify and resolve generator issues. Our experienced technicians use advanced testing equipment to pinpoint problems and implement effective solutions with minimal downtime.",
+    description: "Expert diagnostic services to quickly identify and resolve generator issues with minimal downtime.",
+    fullDescription: "Expert diagnostic services to quickly identify and resolve generator issues. Our experienced technicians use advanced testing equipment to pinpoint problems and implement effective solutions with minimal downtime. When issues arise, quick diagnosis and professional resolution can be the difference between a minor repair and major equipment failure.",
     benefits: [
       "Expert technical diagnosis using advanced tools",
       "Rapid problem identification and resolution",
@@ -142,7 +140,8 @@ const services: Service[] = [
     icon: Truck,
     title: "Delivery & Installation",
     tagline: "Professional setup from delivery to operation",
-    description: "Complete delivery and installation service for your new generator equipment. We handle transportation, site preparation, professional installation, initial startup, and comprehensive testing to ensure reliable operation.",
+    description: "Complete delivery and installation service for your new generator equipment with comprehensive testing.",
+    fullDescription: "Complete delivery and installation service for your new generator equipment. We handle transportation, site preparation, professional installation, initial startup, and comprehensive testing to ensure reliable operation. Our team ensures your new equipment is properly positioned, connected, and tested before handover.",
     benefits: [
       "Safe, insured transportation with tracking",
       "Professional on-site installation by certified technicians",
@@ -188,10 +187,9 @@ const features = [
 ];
 
 export default function Services() {
-  const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [hoveredService, setHoveredService] = useState<string | null>(null);
+  const [expandedService, setExpandedService] = useState<string | null>(services[0].id);
 
-  const selectedServiceData = services.find(s => s.id === selectedService);
+  const selectedServiceData = services.find(s => s.id === expandedService);
 
   return (
     <div>
@@ -214,51 +212,97 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => {
+          <div className="space-y-8">
+            {services.map((service, index) => {
               const Icon = service.icon;
-              const isHovered = hoveredService === service.id;
+              const isExpanded = expandedService === service.id;
+
               return (
-                <div
-                  key={service.id}
-                  onMouseEnter={() => setHoveredService(service.id)}
-                  onMouseLeave={() => setHoveredService(null)}
-                  className="group cursor-pointer"
-                >
-                  <Card
-                    className={`h-full p-8 transition-all duration-300 border-0 overflow-hidden relative ${
-                      isHovered ? "shadow-2xl" : "shadow-lg hover:shadow-xl"
-                    }`}
-                    onClick={() => setSelectedService(service.id)}
-                    data-testid={`card-service-${service.id}`}
+                <div key={service.id} data-testid={`service-section-${service.id}`}>
+                  <button
+                    onClick={() => setExpandedService(service.id)}
+                    className="w-full text-left"
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+                    <div className={`p-8 rounded-lg border-2 transition-all duration-300 ${
+                      isExpanded
+                        ? `bg-gradient-to-br ${service.color} bg-opacity-5 border-transparent shadow-lg`
+                        : "bg-card border-border hover:border-primary hover:shadow-md"
+                    }`}>
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-start gap-4 flex-1">
+                          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                            isExpanded
+                              ? `${service.darkColor} text-white shadow-lg`
+                              : `${service.accentBg} text-foreground`
+                          }`}>
+                            <Icon className="h-8 w-8" />
+                          </div>
 
-                    <div className="relative z-10">
-                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 ${
-                        isHovered ? service.darkColor : `${service.accentBg} text-foreground`
-                      } ${isHovered ? 'text-white shadow-lg scale-110' : ''}`}>
-                        <Icon className="h-8 w-8" />
-                      </div>
+                          <div className="flex-1">
+                            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+                              {service.title}
+                            </h3>
+                            <p className={`text-lg font-semibold transition-colors duration-300 ${
+                              isExpanded ? "text-primary" : "text-muted-foreground"
+                            }`}>
+                              {service.tagline}
+                            </p>
+                          </div>
+                        </div>
 
-                      <h3 className="text-2xl font-bold mb-2 text-foreground">
-                        {service.title}
-                      </h3>
-
-                      <p className="text-sm font-semibold text-primary mb-3">
-                        {service.tagline}
-                      </p>
-
-                      <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-3">
-                        {service.description}
-                      </p>
-
-                      <div className="flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all duration-300">
-                        Learn More
-                        <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        <div className={`flex-shrink-0 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
+                          <ArrowRight className="h-6 w-6 text-primary" />
+                        </div>
                       </div>
                     </div>
-                  </Card>
+                  </button>
+
+                  {isExpanded && (
+                    <div className="mt-8 space-y-8 animate-in fade-in slide-in-from-top-4 duration-300">
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div className="lg:col-span-2">
+                          <div>
+                            <h4 className="text-xl font-bold text-foreground mb-4">Overview</h4>
+                            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                              {service.fullDescription}
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="text-xl font-bold text-foreground mb-6">Our Process</h4>
+                            <div className="space-y-4">
+                              {service.process.map((step, i) => (
+                                <div key={i} className="flex items-start gap-4">
+                                  <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br ${service.color} text-white text-sm font-bold flex-shrink-0`}>
+                                    {i + 1}
+                                  </span>
+                                  <span className="text-foreground pt-1 text-base">{step}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <h4 className="text-xl font-bold text-foreground mb-6">Key Benefits</h4>
+                          <ul className="space-y-4">
+                            {service.benefits.map((benefit, i) => (
+                              <li key={i} className="flex items-start gap-3">
+                                <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                                <span className="text-foreground text-base leading-relaxed">{benefit}</span>
+                              </li>
+                            ))}
+                          </ul>
+
+                          <Button className="w-full mt-8 py-6 text-base" data-testid={`button-request-${service.id}`}>
+                            Request This Service
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {index < services.length - 1 && <div className="mt-8 border-b border-border" />}
                 </div>
               );
             })}
@@ -390,81 +434,6 @@ export default function Services() {
           </Button>
         </div>
       </section>
-
-      <Dialog open={selectedService !== null} onOpenChange={() => setSelectedService(null)}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-          {selectedServiceData && (
-            <>
-              <DialogHeader>
-                <div className={`w-full h-32 rounded-lg bg-gradient-to-br ${selectedServiceData.color} flex items-center justify-center mb-6 -mx-6 -mt-6`}>
-                  {(() => {
-                    const ServiceIcon = selectedServiceData.icon;
-                    return <ServiceIcon className="h-16 w-16 text-white" />;
-                  })()}
-                </div>
-
-                <DialogTitle className="text-3xl font-bold">
-                  {selectedServiceData.title}
-                </DialogTitle>
-                <p className="text-lg text-primary font-semibold mt-2">
-                  {selectedServiceData.tagline}
-                </p>
-              </DialogHeader>
-
-              <div className="space-y-8 mt-8">
-                <div>
-                  <p className="text-lg text-foreground leading-relaxed">
-                    {selectedServiceData.description}
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl font-bold mb-4 text-foreground">Key Benefits</h3>
-                  <ul className="space-y-3">
-                    {selectedServiceData.benefits.map((benefit, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground text-lg">{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl font-bold mb-4 text-foreground">Our Process</h3>
-                  <ol className="space-y-3">
-                    {selectedServiceData.process.map((step, i) => (
-                      <li key={i} className="flex items-start gap-4">
-                        <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br ${selectedServiceData.color} text-white text-sm font-bold flex-shrink-0`}>
-                          {i + 1}
-                        </span>
-                        <span className="text-foreground text-lg pt-1">{step}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-
-                <div className="pt-6 border-t border-border flex gap-3">
-                  <Button
-                    onClick={() => setSelectedService(null)}
-                    variant="outline"
-                    className="flex-1 py-6"
-                    data-testid="button-close-dialog"
-                  >
-                    Close
-                  </Button>
-                  <Button
-                    className="flex-1 py-6"
-                    data-testid="button-contact-service"
-                  >
-                    Request This Service
-                  </Button>
-                </div>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }
