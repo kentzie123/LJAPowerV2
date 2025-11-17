@@ -5,18 +5,21 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import {
-  Zap,
   Wrench,
+  Zap,
   Cpu,
   AlertTriangle,
   Truck,
   CheckCircle2,
-  ArrowRight
+  ArrowRight,
+  Shield,
+  Clock,
+  Users,
+  Lightbulb
 } from "lucide-react";
 import serviceImage from '@assets/generated_images/Technician_servicing_generator_d5ab4806.png';
 
@@ -24,11 +27,12 @@ interface Service {
   id: string;
   icon: React.ElementType;
   title: string;
+  tagline: string;
   description: string;
-  shortDesc: string;
   benefits: string[];
   process: string[];
   color: string;
+  darkColor: string;
   accentBg: string;
 }
 
@@ -37,133 +41,155 @@ const services: Service[] = [
     id: "preventive-maintenance",
     icon: Wrench,
     title: "Preventive Maintenance",
-    description: "Keep your generator in peak condition with our comprehensive maintenance programs",
-    shortDesc: "Regular inspections and maintenance to prevent breakdowns",
+    tagline: "Keep systems running at peak performance",
+    description: "Proactive maintenance programs designed to keep your generator operating reliably and efficiently. We handle regular inspections, fluid checks, filter replacements, and comprehensive testing to prevent unexpected breakdowns.",
     benefits: [
-      "Extended equipment lifespan",
-      "Reduced risk of unexpected failures",
-      "Optimized performance and fuel efficiency",
-      "Compliance with warranty requirements",
-      "Detailed service records and reporting"
+      "Extended equipment lifespan through regular care",
+      "Reduced risk of catastrophic failures",
+      "Optimized fuel efficiency and performance",
+      "Compliance with manufacturer warranty requirements",
+      "Detailed service records for compliance tracking"
     ],
     process: [
-      "Customized maintenance schedule based on usage",
-      "Visual and operational inspections",
-      "Oil and fluid level checks and replacements",
-      "Filter replacements and system cleaning",
-      "Battery testing and load testing",
-      "Performance verification and reporting"
+      "Assessment of your equipment and usage patterns",
+      "Development of customized maintenance schedule",
+      "Regular visual and operational inspections",
+      "Oil, fluid, and filter maintenance",
+      "Battery testing and load verification",
+      "Comprehensive performance reports"
     ],
-    color: "text-blue-600",
-    accentBg: "bg-blue-50"
+    color: "from-blue-500 to-cyan-500",
+    darkColor: "bg-blue-600",
+    accentBg: "bg-blue-100"
   },
   {
     id: "ats-installation",
     icon: Zap,
     title: "ATS Installation",
-    description: "Automatic Transfer Switch systems for seamless power failover and backup",
-    shortDesc: "Automatic switching between main power and generator",
+    tagline: "Automatic power failover in seconds",
+    description: "Professional Automatic Transfer Switch installation that seamlessly switches between utility power and your generator with zero downtime. Ensures continuous operation during outages with intelligent control systems.",
     benefits: [
-      "Automatic power transfer with zero downtime",
-      "Seamless transition between power sources",
-      "Professional installation and configuration",
-      "System testing and commissioning",
-      "24/7 monitoring capability"
+      "Automatic transfer with zero manual intervention",
+      "Zero downtime during power transitions",
+      "Seamless integration with existing electrical systems",
+      "Professional installation by certified electricians",
+      "24/7 monitoring and protection capabilities"
     ],
     process: [
-      "Site assessment and electrical evaluation",
-      "ATS system selection and sizing",
-      "Professional installation by certified electricians",
-      "Integration with existing electrical systems",
-      "Comprehensive system testing",
-      "Training and documentation"
+      "Complete site electrical assessment",
+      "ATS system selection and sizing analysis",
+      "Professional installation and integration",
+      "Connection to existing generator system",
+      "Comprehensive system testing and validation",
+      "Staff training and documentation"
     ],
-    color: "text-yellow-600",
-    accentBg: "bg-yellow-50"
+    color: "from-yellow-500 to-orange-500",
+    darkColor: "bg-yellow-600",
+    accentBg: "bg-yellow-100"
   },
   {
     id: "controller-conversion",
     icon: Cpu,
-    title: "Generator Controller Conversion",
-    description: "Upgrade to modern generator control systems for enhanced functionality and reliability",
-    shortDesc: "Convert to advanced control systems",
+    title: "Controller Conversion",
+    tagline: "Upgrade to smart generator controls",
+    description: "Replace outdated controllers with modern, intelligent generator control systems. Enhanced monitoring, diagnostics, and remote capabilities provide superior performance and management of your power generation infrastructure.",
     benefits: [
-      "Enhanced monitoring and diagnostics",
-      "Improved fuel efficiency and performance",
-      "Remote monitoring capabilities",
-      "Better start/stop logic and load management",
-      "Modern interface and user-friendly controls"
+      "Advanced real-time monitoring and diagnostics",
+      "Improved fuel efficiency and engine performance",
+      "Remote monitoring and control capabilities",
+      "Intelligent load management and load shedding",
+      "Modern user interface with data logging"
     ],
     process: [
       "Evaluation of existing control system",
-      "Controller selection and compatibility assessment",
-      "Professional installation and integration",
-      "System calibration and programming",
-      "Extensive testing and optimization",
-      "Staff training on new system"
+      "New controller selection and compatibility check",
+      "Professional removal and installation",
+      "System integration and configuration",
+      "Calibration and performance optimization",
+      "Comprehensive staff training"
     ],
-    color: "text-purple-600",
-    accentBg: "bg-purple-50"
+    color: "from-purple-500 to-pink-500",
+    darkColor: "bg-purple-600",
+    accentBg: "bg-purple-100"
   },
   {
     id: "troubleshooting",
     icon: AlertTriangle,
     title: "Troubleshooting & Diagnostics",
-    description: "Expert diagnostic services to identify and resolve generator issues quickly",
-    shortDesc: "Fast diagnosis and resolution of problems",
+    tagline: "Fast diagnosis and expert solutions",
+    description: "Expert diagnostic services to quickly identify and resolve generator issues. Our experienced technicians use advanced testing equipment to pinpoint problems and implement effective solutions with minimal downtime.",
     benefits: [
-      "Expert technical diagnosis",
-      "Minimized downtime and disruption",
-      "Preventive recommendations",
-      "Detailed diagnostic reports",
-      "24/7 emergency response available"
+      "Expert technical diagnosis using advanced tools",
+      "Rapid problem identification and resolution",
+      "Preventive recommendations to avoid future issues",
+      "Detailed diagnostic reports for your records",
+      "24/7 emergency response availability"
     ],
     process: [
-      "Issue assessment and initial diagnostics",
-      "In-depth system testing and analysis",
+      "Comprehensive issue assessment and evaluation",
+      "Advanced diagnostic testing and analysis",
       "Root cause identification",
-      "Repair recommendations and quotes",
-      "Repairs using genuine parts",
-      "System verification and follow-up"
+      "Repair recommendations and cost estimates",
+      "Professional repairs using genuine parts",
+      "Post-repair testing and verification"
     ],
-    color: "text-red-600",
-    accentBg: "bg-red-50"
+    color: "from-red-500 to-rose-500",
+    darkColor: "bg-red-600",
+    accentBg: "bg-red-100"
   },
   {
     id: "delivery",
     icon: Truck,
     title: "Delivery & Installation",
-    description: "Professional delivery and installation services for new generators and equipment",
-    shortDesc: "Reliable delivery and setup",
+    tagline: "Professional setup from delivery to operation",
+    description: "Complete delivery and installation service for your new generator equipment. We handle transportation, site preparation, professional installation, initial startup, and comprehensive testing to ensure reliable operation.",
     benefits: [
-      "Safe and secure transportation",
-      "Professional installation on site",
-      "Proper placement and positioning",
-      "Initial system startup and testing",
-      "Site cleanup and documentation"
+      "Safe, insured transportation with tracking",
+      "Professional on-site installation by certified technicians",
+      "Proper equipment placement and positioning",
+      "Initial system startup and load testing",
+      "Complete site cleanup and documentation"
     ],
     process: [
       "Delivery scheduling and coordination",
-      "Safe transportation with tracking",
+      "Safe transportation with real-time updates",
       "Site preparation and equipment positioning",
-      "Professional installation setup",
-      "Initial system startup and checks",
-      "Handover and customer orientation"
+      "Professional installation and connection",
+      "Initial startup and load testing",
+      "Handover, training, and documentation"
     ],
-    color: "text-green-600",
-    accentBg: "bg-green-50"
+    color: "from-green-500 to-emerald-500",
+    darkColor: "bg-green-600",
+    accentBg: "bg-green-100"
   }
 ];
 
-const stats = [
-  { value: "15+", label: "Years of Experience" },
-  { value: "500+", label: "Systems Installed" },
-  { value: "<2hrs", label: "Emergency Response" },
-  { value: "99.5%", label: "Uptime Rate" }
+const features = [
+  {
+    icon: Shield,
+    title: "Industry-Leading Expertise",
+    description: "15+ years of experience serving generator systems with certified technicians and proven track records"
+  },
+  {
+    icon: Clock,
+    title: "Rapid Response",
+    description: "Average emergency response under 2 hours, 24/7 availability for critical situations"
+  },
+  {
+    icon: Users,
+    title: "Dedicated Support",
+    description: "Personalized service with direct access to experienced professionals who know your systems"
+  },
+  {
+    icon: Lightbulb,
+    title: "Smart Solutions",
+    description: "Modern technology and innovative approaches to maximize your generator performance"
+  }
 ];
 
 export default function Services() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [hoveredService, setHoveredService] = useState<string | null>(null);
 
   const selectedServiceData = services.find(s => s.id === selectedService);
 
@@ -171,202 +197,267 @@ export default function Services() {
     <div>
       <Hero
         title="Professional Generator Services"
-        subtitle="Comprehensive solutions for installation, maintenance, and support"
+        subtitle="Complete power generation solutions tailored to your needs"
         backgroundImage={serviceImage}
         showCTA={false}
         height="medium"
       />
 
-      <section className="py-20 px-6 bg-background">
+      <section className="py-24 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground" data-testid="text-services-title">
-              Our Services
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-foreground" data-testid="text-services-title">
+              Our Core Services
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Complete power generation solutions tailored to your needs
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              LJA Power Limited Co. provides comprehensive generator solutions covering everything from preventive maintenance to emergency support. We ensure your power generation systems operate reliably when you need them most.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => {
               const Icon = service.icon;
+              const isHovered = hoveredService === service.id;
               return (
-                <Card
+                <div
                   key={service.id}
-                  className={`p-8 cursor-pointer transition-all hover-elevate active-elevate-2 border-l-4 ${
-                    selectedService === service.id
-                      ? "ring-2 ring-primary"
-                      : ""
-                  }`}
-                  onClick={() => setSelectedService(service.id)}
-                  data-testid={`card-service-${service.id}`}
+                  onMouseEnter={() => setHoveredService(service.id)}
+                  onMouseLeave={() => setHoveredService(null)}
+                  className="group cursor-pointer"
                 >
-                  <div className={`w-14 h-14 rounded-lg flex items-center justify-center mb-4 ${service.accentBg}`}>
-                    <Icon className={`h-7 w-7 ${service.color}`} />
-                  </div>
-
-                  <h3 className="text-xl font-bold mb-2 text-foreground">
-                    {service.title}
-                  </h3>
-
-                  <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                    {service.shortDesc}
-                  </p>
-
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="w-full justify-between p-0 h-auto hover:bg-transparent"
-                    data-testid={`button-learn-more-${service.id}`}
+                  <Card
+                    className={`h-full p-8 transition-all duration-300 border-0 overflow-hidden relative ${
+                      isHovered ? "shadow-2xl" : "shadow-lg hover:shadow-xl"
+                    }`}
+                    onClick={() => setSelectedService(service.id)}
+                    data-testid={`card-service-${service.id}`}
                   >
-                    Learn More
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Card>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+
+                    <div className="relative z-10">
+                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 ${
+                        isHovered ? service.darkColor : `${service.accentBg} text-foreground`
+                      } ${isHovered ? 'text-white shadow-lg scale-110' : ''}`}>
+                        <Icon className="h-8 w-8" />
+                      </div>
+
+                      <h3 className="text-2xl font-bold mb-2 text-foreground">
+                        {service.title}
+                      </h3>
+
+                      <p className="text-sm font-semibold text-primary mb-3">
+                        {service.tagline}
+                      </p>
+
+                      <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-3">
+                        {service.description}
+                      </p>
+
+                      <div className="flex items-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all duration-300">
+                        Learn More
+                        <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </Card>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-card border-y border-border">
+      <section className="py-24 px-6 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              Why LJA Power?
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              We combine expertise, reliability, and customer-focused service
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => {
+              const FeatureIcon = feature.icon;
+              return (
+                <div key={index} className="text-center group" data-testid={`feature-${index}`}>
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                    <FeatureIcon className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-foreground">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              Complete Service Coverage
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              From planning to operation to emergency support
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="space-y-4">
+              <h3 className="text-2xl font-bold text-foreground mb-6">Installation & Setup</h3>
+              {[
+                "Professional site assessment and evaluation",
+                "System design and planning",
+                "ATS installation and configuration",
+                "Complete installation and startup",
+                "Testing and commissioning"
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-2xl font-bold text-foreground mb-6">Ongoing Support</h3>
+              {[
+                "Preventive maintenance programs",
+                "24/7 emergency response",
+                "Diagnostics and troubleshooting",
+                "System upgrades and conversions",
+                "Performance monitoring and optimization"
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 bg-gradient-to-r from-slate-900 to-slate-800 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-3xl" />
+        </div>
+
+        <div className="max-w-4xl mx-auto relative z-10 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Performance Metrics
+          </h2>
+          <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
+            Proven track record of reliability and customer satisfaction
+          </p>
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-primary mb-2" data-testid={`text-stat-value-${index}`}>
+            {[
+              { value: "15+", label: "Years Experience" },
+              { value: "500+", label: "Systems Installed" },
+              { value: "<2hrs", label: "Response Time" },
+              { value: "99.5%", label: "Uptime Rate" }
+            ].map((stat, i) => (
+              <div key={i} data-testid={`stat-${i}`}>
+                <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                   {stat.value}
                 </div>
-                <div className="text-sm text-muted-foreground" data-testid={`text-stat-label-${index}`}>
-                  {stat.label}
-                </div>
+                <div className="text-sm text-slate-300">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-background">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-              Why Choose LJA Power?
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              We deliver reliable, professional power generation solutions
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                title: "Expert Technicians",
-                description: "Certified professionals with extensive experience in generator systems"
-              },
-              {
-                title: "24/7 Support",
-                description: "Emergency response available around the clock for critical situations"
-              },
-              {
-                title: "Quality Parts",
-                description: "We use genuine replacement parts and top-tier equipment"
-              },
-              {
-                title: "Competitive Pricing",
-                description: "Transparent quotes with no hidden fees or surprise charges"
-              },
-              {
-                title: "Warranty Coverage",
-                description: "Comprehensive warranties on all parts and labor"
-              },
-              {
-                title: "Fast Response",
-                description: "Average response time under 2 hours for emergency calls"
-              }
-            ].map((item, index) => (
-              <Card key={index} className="p-6" data-testid={`card-benefit-${index}`}>
-                <div className="flex items-start gap-4">
-                  <CheckCircle2 className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
+      <section className="py-24 px-6 bg-card">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            Ready to Protect Your Power?
+          </h2>
+          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+            Contact LJA Power Limited Co. today to discuss your generator needs and discover how we can ensure your operations never miss a beat.
+          </p>
+          <Button size="lg" className="px-8 py-6 text-lg" data-testid="button-contact-cta">
+            Schedule Your Consultation
+          </Button>
         </div>
       </section>
 
       <Dialog open={selectedService !== null} onOpenChange={() => setSelectedService(null)}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           {selectedServiceData && (
             <>
               <DialogHeader>
-                <div className="flex items-start gap-4 mb-4">
-                  <div className={`w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0 ${selectedServiceData.accentBg}`}>
-                    {(() => {
-                      const ServiceIcon = selectedServiceData.icon;
-                      return <ServiceIcon className={`h-8 w-8 ${selectedServiceData.color}`} />;
-                    })()}
-                  </div>
-                  <div>
-                    <DialogTitle className="text-2xl mb-2">
-                      {selectedServiceData.title}
-                    </DialogTitle>
-                    <DialogDescription className="text-base">
-                      {selectedServiceData.description}
-                    </DialogDescription>
-                  </div>
+                <div className={`w-full h-32 rounded-lg bg-gradient-to-br ${selectedServiceData.color} flex items-center justify-center mb-6 -mx-6 -mt-6`}>
+                  {(() => {
+                    const ServiceIcon = selectedServiceData.icon;
+                    return <ServiceIcon className="h-16 w-16 text-white" />;
+                  })()}
                 </div>
+
+                <DialogTitle className="text-3xl font-bold">
+                  {selectedServiceData.title}
+                </DialogTitle>
+                <p className="text-lg text-primary font-semibold mt-2">
+                  {selectedServiceData.tagline}
+                </p>
               </DialogHeader>
 
-              <div className="space-y-6 mt-6">
+              <div className="space-y-8 mt-8">
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-foreground">Key Benefits</h3>
+                  <p className="text-lg text-foreground leading-relaxed">
+                    {selectedServiceData.description}
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold mb-4 text-foreground">Key Benefits</h3>
                   <ul className="space-y-3">
                     {selectedServiceData.benefits.map((benefit, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground">{benefit}</span>
+                        <CheckCircle2 className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-foreground text-lg">{benefit}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-foreground">Our Process</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-foreground">Our Process</h3>
                   <ol className="space-y-3">
                     {selectedServiceData.process.map((step, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-semibold flex-shrink-0">
+                      <li key={i} className="flex items-start gap-4">
+                        <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br ${selectedServiceData.color} text-white text-sm font-bold flex-shrink-0`}>
                           {i + 1}
                         </span>
-                        <span className="text-foreground pt-0.5">{step}</span>
+                        <span className="text-foreground text-lg pt-1">{step}</span>
                       </li>
                     ))}
                   </ol>
                 </div>
 
-                <div className="pt-4 border-t border-border flex gap-3">
+                <div className="pt-6 border-t border-border flex gap-3">
                   <Button
                     onClick={() => setSelectedService(null)}
                     variant="outline"
-                    className="flex-1"
+                    className="flex-1 py-6"
                     data-testid="button-close-dialog"
                   >
                     Close
                   </Button>
                   <Button
-                    className="flex-1"
+                    className="flex-1 py-6"
                     data-testid="button-contact-service"
                   >
-                    Request Service
+                    Request This Service
                   </Button>
                 </div>
               </div>
@@ -374,20 +465,6 @@ export default function Services() {
           )}
         </DialogContent>
       </Dialog>
-
-      <section className="py-20 px-6 bg-card">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-            Ready to Ensure Your Power Generation?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Contact us today to discuss which service best fits your needs
-          </p>
-          <Button size="lg" data-testid="button-contact-cta">
-            Get in Touch
-          </Button>
-        </div>
-      </section>
     </div>
   );
 }
